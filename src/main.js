@@ -33,7 +33,7 @@ function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
-
+    console.log('render result = ', result)
 
     sampleTable.render(result)
 }
