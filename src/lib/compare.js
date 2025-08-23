@@ -302,7 +302,11 @@ function createComparison(ruleNames, customRules = []) {
             }),
             ...customRules
         ];
-
+        // console.log('source = ', source)
+        // console.log('target = ', target)
+        // console.log('rulesList = ', rulesList)
+        // let ddd = compare(source, target, rulesList);
+        // console.log('ddd = ', ddd)
         return compare(source, target, rulesList);
     };
 }
