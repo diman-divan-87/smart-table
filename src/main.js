@@ -9,6 +9,7 @@ import { processFormData } from "./lib/utils.js";
 import { initTable } from "./components/table.js";
 import { initPagination } from "./components/pagination.js";
 import { initSorting } from "./components/sorting.js";
+import { initFiltering } from "./components/filtering.js";
 // @todo: подключение
 
 // Исходные данные используемые в render()
@@ -41,6 +42,7 @@ function render(action) {
     // @todo: использование
     result = applyPagination(result, state, action);
     result = applySorting(result, state, action);
+    result = applyFiltering(result, state, action);
     sampleTable.render(result);
 }
 
@@ -48,13 +50,17 @@ const sampleTable = initTable(
     {
         tableTemplate: "table",
         rowTemplate: "row",
-        before: ['header'],
+        before: ['header', 'filter'],
         after: ["pagination"],
     },
     render
 );
 
 // @todo: инициализация
+const applyFiltering = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
+    searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
+});
+
 const applySorting = initSorting([        // Нам нужно передать сюда массив элементов, которые вызывают сортировку, чтобы изменять их визуальное представление
     sampleTable.header.elements.sortByDate,
     sampleTable.header.elements.sortByTotal
