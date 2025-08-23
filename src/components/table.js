@@ -15,7 +15,7 @@ export function initTable(settings, onAction) {
     before.reverse().forEach((subName) => {
         // перебираем нужный массив идентификаторов
         root[subName] = cloneTemplate(subName); // клонируем и получаем объект, сохраняем в таблице
-        root.container.append(root[subName].container); // добавляем к таблице после (append) или до (prepend)
+        root.container.prepend(root[subName].container); // добавляем к таблице после (append) или до (prepend)
     });
     after.forEach((subName) => {
         // перебираем нужный массив идентификаторов
