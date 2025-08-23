@@ -11,8 +11,6 @@ export function initTable(settings, onAction) {
     const { tableTemplate, rowTemplate, before, after } = settings;
     const root = cloneTemplate(tableTemplate);
 
-    console.log("before = ", before);
-    console.log("after = ", after);
     // @todo: #1.2 —  вывести дополнительные шаблоны до и после таблицы
     before.reverse().forEach((subName) => {
         // перебираем нужный массив идентификаторов
@@ -62,6 +60,6 @@ export function initTable(settings, onAction) {
 
         root.elements.rows.replaceChildren(...nextRows);
     };
-    console.log("root = ", root.container);
+
     return { ...root, render };
 }
