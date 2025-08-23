@@ -23,27 +23,22 @@ export function initFiltering(elements, indexes) {
             );
         });
     return (data, state, action) => {
-
+        let dataArr = [...data]
         // @todo: #4.2 — обработать очистку поля
         if (action && action.name === 'clear') {
-            const button = action.target;
-            const fieldName = button.dataset.field;
-            const parent = button.closest('.filter-field');
-            
-            if (parent) {
-                const input = parent.querySelector('input, select');
-                if (input) {
-                    input.value = '';
-                }
+            switch ( action.dataset.field) {
+                case "date":
+                     elements.searchByDate.value = ''
+                    break;
+                case "customer":
+                     elements.searchByCustomer.value = ''
+                    break; 
             }
-            
-            if (fieldName && state[fieldName] !== undefined) {
-                state[fieldName] = '';
-            }
+        } else {
+            dataArr = data.filter(row => compare(row, state));
         }
 
         // @todo: #4.5 — отфильтровать данные используя компаратор
-        return data.filter(row => compare(row, state));
-        return data
+        return dataArr;
     };
 }
