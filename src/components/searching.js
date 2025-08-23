@@ -9,12 +9,6 @@ export function initSearching(searchField) {
     );
     return (data, state, action) => {
         // @todo: #5.2 — применить компаратор
-        console.log('data = ', data)
-        console.log('state = ', state)
-        // state.data = state.search
-        state.customer = state.search
-        // state.seller = state.search
         return data.filter(row => comparator(row, state, action));
-        // return data
     }
 }
