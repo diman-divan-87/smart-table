@@ -19,9 +19,21 @@ export function initFiltering(elements) {
             });
     };
 
+
+
     const applyFiltering = (query, state, action) => {
         // код с обработкой очистки поля
-
+        // @todo: #4.2 — обработать очистку поля
+        if (action && action.name === 'clear') {
+            switch ( action.dataset.field) {
+                case "date":
+                     elements.searchByDate.value = ''
+                    break;
+                case "customer":
+                     elements.searchByCustomer.value = ''
+                    break; 
+            }
+        }
         // @todo: #4.5 — отфильтровать данные, используя компаратор
         const filter = {};
         Object.keys(elements).forEach((key) => {
