@@ -47,7 +47,9 @@ async function render(action) {
     // result = applyFiltering(result, state, action);
     // result = applySorting(result, state, action);
     // result = applyPagination(result, state, action);
+    query = applyPagination(query, state, action); // обновляем query
     const { total, items } = await api.getRecords(query);
+    updatePagination(total, query); // перерисовываем пагинатор
     sampleTable.render(items);
 }
 
@@ -73,8 +75,7 @@ const applySorting = initSorting([
     sampleTable.header.elements.sortByDate,
     sampleTable.header.elements.sortByTotal,
 ]);
-
-const applyPagination = initPagination(
+const {applyPagination, updatePagination} = initPagination(
     sampleTable.pagination.elements, // передаём сюда элементы пагинации, найденные в шаблоне
     (el, page, isCurrent) => {
         // и колбэк, чтобы заполнять кнопки страниц данными
@@ -86,6 +87,21 @@ const applyPagination = initPagination(
         return el;
     }
 );
+
+
+
+// const applyPagination = initPagination(
+//     sampleTable.pagination.elements, // передаём сюда элементы пагинации, найденные в шаблоне
+//     (el, page, isCurrent) => {
+//         // и колбэк, чтобы заполнять кнопки страниц данными
+//         const input = el.querySelector("input");
+//         const label = el.querySelector("span");
+//         input.value = page;
+//         input.checked = isCurrent;
+//         label.textContent = page;
+//         return el;
+//     }
+// );
 
 const appRoot = document.querySelector("#app");
 appRoot.appendChild(sampleTable.container);
